@@ -1,3 +1,4 @@
+
 from flask import Flask, jsonify
 
 app = Flask(__name__)
@@ -25,4 +26,13 @@ def get_ordem_pedidos():
     return jsonify(ordem_pedidos)
 
 
+@app.route('/odem_pedidos/<int:id>')
+def get_odem_pedidos_by_id(id):
+    for op in ordem_pedidos:
+        if op['id'] == id:
+            return jsonify(op)
+    return jsonify({'message': 'Pedido {} não encontrado'.format(id)})
+
 app.run(port=5000)
+
+
